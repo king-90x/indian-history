@@ -1,0 +1,168 @@
+/* INDIA AFTER 1947 — modern India theme
+   dark navy #071117/#101820 | ivory #f2ead8 | saffron/gold #d9a441 | muted India-green #2f6b4f */
+:root{
+  --navy:#071117; --navy-soft:#101820;
+  --ivory:#f2ead8;
+  --saffron:#d9a441; --saffron-soft:#e8c074;
+  --gold: #c9a227;
+   --charcoal: #17140f;
+   --gold-light: #e0bd7d;
+  --green:#2f6b4f;
+  --dark-red:#7a2e2e; --maroon:#4a1f1f; --slate:#5c6670;
+  --font-display:"Fraunces",serif;
+  --font-label:"IBM Plex Mono",monospace;
+  --font-body:"Inter",sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--navy);color:var(--ivory);font-family:var(--font-body);font-size:1.05rem;line-height:1.7}
+img{max-width:100%;display:block}
+h1,h2,h3{font-family:var(--font-display);margin:0}
+a{text-decoration:none;color:inherit}
+
+.page-wrap{padding-left:clamp(1.5rem,6vw,5rem);padding-right:clamp(1.5rem,6vw,5rem)}
+.cover-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+
+/* ============ HERO ============ */
+.hero-section{position:relative;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;overflow:hidden}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(7,17,23,.75) 0%,rgba(7,17,23,.88) 55%,rgba(7,17,23,.97) 100%)}
+.hero-glow{position:absolute;inset:0;background:
+  radial-gradient(ellipse 60% 45% at 30% 30%,rgba(217,164,65,.22),transparent 65%),
+  radial-gradient(ellipse 50% 40% at 75% 70%,rgba(47,107,79,.14),transparent 70%)}
+.hero-grain{position:absolute;inset:0;opacity:.07;mix-blend-mode:overlay;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+
+.hero-content{position:relative;max-width:46rem}
+.hr-line{width:70px;height:1px;background:var(--saffron);margin:1.1rem auto}
+.hero-title{font-size:clamp(2.2rem,6.5vw,4.3rem);font-weight:700;letter-spacing:.04em;color:var(--ivory)}
+.hero-subtitle{font-family:var(--font-label);font-size:clamp(.95rem,1.6vw,1.15rem);letter-spacing:.08em;color:var(--saffron-soft);text-transform:uppercase;margin:.3rem 0}
+
+.glass-box{
+  margin:2rem auto 1.2rem;
+  max-width:36rem;
+  background:rgba(16,24,32,.55);
+  border:1px solid rgba(242,234,216,.14);
+  backdrop-filter:blur(6px);
+  -webkit-backdrop-filter:blur(6px);
+  padding:1.8rem clamp(1.3rem,3vw,2.3rem);
+  border-radius:4px;
+}
+.glass-box p{margin:0 0 .9rem;color:rgba(242,234,216,.9);font-size:1rem}
+.glass-box p:last-child{margin-bottom:0}
+
+.hero-cta-line{font-family:var(--font-label);font-size:.88rem;letter-spacing:.06em;color:rgba(242,234,216,.65);text-transform:uppercase;margin-top:.5rem}
+
+.scroll-note{position:absolute;bottom:1.8rem;font-family:var(--font-label);font-size:.75rem;letter-spacing:.08em;color:rgba(242,234,216,.55);text-transform:uppercase;animation:bob 2.2s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}}
+
+/* ============ CHOICE SECTION ============ */
+.choice-section{position:relative;background:var(--navy-soft);padding:5rem 0 6rem}
+.choice-kicker{font-family:var(--font-label);color:var(--saffron-soft);font-size:.85rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.6rem}
+.choice-heading{font-size:clamp(1.7rem,3.4vw,2.6rem);font-weight:600;color:var(--ivory);margin-bottom:3rem}
+
+.choice-wrap{position:relative;max-width:1200px;margin:0 auto;padding:0 clamp(1.2rem,4vw,3rem)}
+
+/* Ashoka Chakra — centered, faint, split lighting either side */
+.chakra-wrap{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:180px;height:180px;z-index:3;pointer-events:none;display:flex;align-items:center;justify-content:center}
+.chakra-img{width:100%;height:100%;opacity:.55;filter:drop-shadow(0 0 10px rgba(242,234,216,.25))}
+.chakra-glow-left{position:absolute;left:-60px;top:50%;transform:translateY(-50%);width:160px;height:160px;border-radius:50%;background:radial-gradient(circle,rgba(217,164,65,.35),transparent 70%)}
+.chakra-glow-right{position:absolute;right:-60px;top:50%;transform:translateY(-50%);width:160px;height:160px;border-radius:50%;background:radial-gradient(circle,rgba(10,10,10,.5),transparent 70%)}
+
+.choice-cards{display:grid;grid-template-columns:1fr 1fr;gap:1.4rem;position:relative;z-index:2}
+
+.side-card{
+  position:relative;
+  display:block;
+  min-height:520px;
+  overflow:hidden;
+  border:1px solid rgba(242,234,216,.12);
+  transition:transform .45s cubic-bezier(.22,.9,.35,1),box-shadow .45s ease;
+}
+.side-card:hover{transform:translateY(-6px);box-shadow:0 30px 55px rgba(0,0,0,.5)}
+.side-card img{transition:transform 1s cubic-bezier(.22,.9,.35,1)}
+.side-card:hover img{transform:scale(1.07)}
+
+.side-overlay{position:absolute;inset:0}
+.bright-overlay{background:linear-gradient(180deg,rgba(7,17,23,.35) 0%,rgba(16,20,10,.78) 65%,rgba(10,9,3,.95) 100%)}
+.dark-overlay{background:linear-gradient(180deg,rgba(7,17,23,.45) 0%,rgba(20,16,15,.82) 65%,rgba(10,7,7,.97) 100%)}
+
+.side-content{position:relative;height:100%;display:flex;flex-direction:column;justify-content:flex-end;padding:2.2rem clamp(1.3rem,3vw,2.2rem);z-index:2}
+.side-icon{font-size:1.6rem;margin-bottom:.7rem}
+.bright-card .side-icon{color:var(--saffron)}
+.dark-card .side-icon{color:var(--slate)}
+.side-content h3{font-size:clamp(1.6rem,2.6vw,2.2rem);color:var(--ivory);margin-bottom:.6rem}
+.side-subtext{font-family:var(--font-label);font-size:.85rem;letter-spacing:.04em;color:rgba(242,234,216,.8);margin-bottom:1.4rem}
+.side-btn{display:inline-block;font-family:var(--font-label);font-size:.85rem;letter-spacing:.05em;text-transform:uppercase;padding:.7rem 1.3rem;border:1px solid currentColor;transition:background-color .3s ease,color .3s ease}
+
+.bright-card .side-btn{color:var(--saffron-soft);border-color:var(--saffron)}
+.bright-card:hover .side-btn{background:var(--saffron);color:var(--navy)}
+.bright-card .side-content::before{content:"";position:absolute;left:0;top:-2rem;width:40px;height:3px;background:var(--green)}
+
+.dark-card .side-btn{color:#c9c2b4;border-color:var(--slate)}
+.dark-card:hover .side-btn{background:var(--dark-red);color:var(--ivory);border-color:var(--dark-red)}
+.dark-card .side-content::before{content:"";position:absolute;left:0;top:-2rem;width:40px;height:3px;background:var(--dark-red)}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .choice-cards{grid-template-columns:1fr;gap:1.2rem}
+  .chakra-wrap{position:static;transform:none;margin:0 auto 1.6rem;width:110px;height:110px}
+  .chakra-glow-left,.chakra-glow-right{display:none}
+  .side-card{min-height:380px}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .scroll-note{animation:none}
+  .side-card,.side-card img{transition:none}
+}
+
+.page-arrow {
+    position: fixed;
+    top: 50%;
+    /* transform: translateY(-50%); */
+    /* transform: rotate(90deg); */
+    z-index: 1000;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    border: 1px solid rgba(185, 141, 62, .55);
+    background: rgba(23, 20, 15, .65);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    display: grid;
+    place-items: center;
+    text-decoration: none;
+    transition: background .3s ease, border-color .3s ease, transform .3s ease;
+}
+
+.page-arrow-left  { left: 1.2rem; transform: rotate(-90deg); }
+.page-arrow-right { right: 1.2rem; transform: rotate(-90deg);}
+
+/* chevron drawn with CSS */
+.page-arrow::before {
+    content: "";
+    width: 11px;
+    height: 11px;
+    border-top: 2.2px solid var(--gold-light);
+    border-right: 2.2px solid var(--gold-light);
+    transition: border-color .3s ease;
+}
+
+/* left arrow points up, right arrow points down */
+.page-arrow-left::before  { transform: rotate(-45deg); margin-top: 4px; }
+.page-arrow-right::before { transform: rotate(135deg); margin-bottom: 4px; }
+
+.page-arrow:hover {
+    background: var(--gold);
+    border-color: var(--gold-light);
+}
+
+.page-arrow:hover::before {
+    border-color: var(--charcoal);
+}
+
+@media (max-width: 640px) {
+    .page-arrow { width: 40px; height: 40px; }
+    .page-arrow::before { width: 9px; height: 9px; }
+    .page-arrow-left  { left: .5rem; }
+    .page-arrow-right { right: .5rem; }
+}

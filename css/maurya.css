@@ -1,0 +1,1052 @@
+/* =========================================================
+   THE MAURYA EMPIRE — stylesheet
+   Palette: charcoal, deep brown, muted gold, stone/parchment
+   ========================================================= */
+
+:root {
+    --charcoal: #17140f;
+    --charcoal-2: #201b14;
+    --brown-deep: #3a2a1a;
+    --brown-mid: #59402a;
+    --brown-warm: #6e4c2c;
+    --gold: #b98d3e;
+    --gold-light: #e0bd7d;
+    --gold-dim: #8a6b34;
+    --stone: #cdbf9e;
+    --parchment: #efe6d1;
+    --parchment-2: #e6d9b9;
+    --ink: #f4ecd8;
+    --ink-dim: #d8ccae;
+    --shadow: rgba(0, 0, 0, .45);
+
+    --font-display: 'Cinzel', serif;
+    --font-body: 'Source Serif 4', 'Georgia', serif;
+
+    --section-pad: clamp(4rem, 9vw, 8rem);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    background: var(--charcoal);
+    color: var(--ink);
+    font-family: var(--font-body);
+    overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+h4 {
+    font-family: var(--font-display);
+    letter-spacing: .02em;
+    margin: 0;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+.container-narrow {
+    max-width: 720px;
+    margin: 0 auto;
+}
+
+/* ---------- shared section chrome ---------- */
+.section {
+    position: relative;
+    padding: var(--section-pad) 6vw;
+}
+
+.section-dark {
+    background: var(--charcoal);
+    color: var(--ink);
+}
+
+.section-brown {
+    background: linear-gradient(180deg, var(--brown-deep), var(--charcoal-2));
+    color: var(--ink);
+}
+
+.section-stone {
+    background: var(--parchment);
+    color: var(--brown-deep);
+}
+
+.eyebrow-line {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    color: var(--gold-light);
+    font-family: var(--font-display);
+    font-size: .85rem;
+    letter-spacing: .12em;
+    margin-bottom: 1.2rem;
+}
+
+.eyebrow-line::before {
+    content: "";
+    width: 46px;
+    height: 1px;
+    background: var(--gold-light);
+    display: inline-block;
+}
+
+.section-stone .eyebrow-line {
+    color: var(--brown-warm);
+}
+
+.section-stone .eyebrow-line::before {
+    background: var(--brown-warm);
+}
+
+.section h2 {
+    font-size: clamp(2rem, 4vw, 3.1rem);
+    line-height: 1.15;
+    max-width: 16ch;
+}
+
+.section-stone h2 {
+    color: var(--brown-deep);
+}
+
+.lede {
+    font-size: 1.15rem;
+    line-height: 1.75;
+    color: var(--ink-dim);
+    max-width: 62ch;
+}
+
+.section-stone .lede {
+    color: #5a4127;
+}
+
+.gold-rule {
+    width: 90px;
+    height: 2px;
+    background: linear-gradient(90deg, var(--gold), transparent);
+    margin: 1.6rem 0;
+}
+
+/* reveal-on-scroll (progressive enhancement via IntersectionObserver) */
+.reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity .9s cubic-bezier(.2, .7, .2, 1), transform .9s cubic-bezier(.2, .7, .2, 1);
+}
+
+.reveal.in-view {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.reveal-delay-1.in-view {
+    transition-delay: .12s;
+}
+
+.reveal-delay-2.in-view {
+    transition-delay: .24s;
+}
+
+.reveal-delay-3.in-view {
+    transition-delay: .36s;
+}
+
+/* =========================================================
+   1. HERO
+   ========================================================= */
+.hero {
+    min-height: 100svh;
+    display: flex;
+    align-items: flex-end;
+    padding: 6vw;
+    background:
+        linear-gradient(180deg, rgba(23, 20, 15, .35) 0%, rgba(23, 20, 15, .55) 55%, rgba(23, 20, 15, .96) 100%),
+        url(../img/image\ copy\ 2.png) center/cover no-repeat;
+    position: relative;
+}
+
+.hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle at 20% 30%, rgba(185, 141, 62, .10), transparent 45%);
+    pointer-events: none;
+}
+
+.hero-inner {
+    max-width: 900px;
+    position: relative;
+    z-index: 1;
+}
+
+.hero-era {
+    font-family: var(--font-display);
+    color: var(--gold-light);
+    letter-spacing: .18em;
+    font-size: .95rem;
+    margin-bottom: 1.4rem;
+}
+
+.hero h1 {
+    font-size: clamp(2.4rem, 6.4vw, 5.2rem);
+    line-height: 1.08;
+    color: var(--ink);
+    text-shadow: 0 6px 30px rgba(0, 0, 0, .55);
+}
+
+.hero h1 span {
+    color: var(--gold-light);
+}
+
+.hero p {
+    margin-top: 1.6rem;
+    max-width: 58ch;
+    font-size: 1.2rem;
+    line-height: 1.7;
+    color: var(--ink-dim);
+}
+
+.scroll-cue {
+    position: absolute;
+    bottom: 2.4rem;
+    left: 6vw;
+    display: flex;
+    align-items: center;
+    gap: .7rem;
+    color: var(--gold-light);
+    font-family: var(--font-display);
+    font-size: .75rem;
+    letter-spacing: .18em;
+}
+
+.scroll-cue .bar {
+    width: 1px;
+    height: 40px;
+    background: var(--gold-light);
+    position: relative;
+    overflow: hidden;
+}
+
+.scroll-cue .bar::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: -100%;
+    width: 100%;
+    height: 100%;
+    background: var(--ink);
+    animation: dropline 2.2s ease-in-out infinite;
+}
+
+@keyframes dropline {
+    0% {
+        top: -100%;
+    }
+
+    60% {
+        top: 100%;
+    }
+
+    100% {
+        top: 100%;
+    }
+}
+
+/* =========================================================
+   2 / 3  two-up content blocks (Before the Mauryas / Rise)
+   ========================================================= */
+.split {
+    display: grid;
+    grid-template-columns: 1.05fr .95fr;
+    gap: clamp(2rem, 5vw, 5rem);
+    align-items: center;
+}
+
+.split.reverse .split-media {
+    order: 2;
+}
+
+@media (max-width: 860px) {
+    .split {
+        grid-template-columns: 1fr;
+    }
+
+    .split.reverse .split-media {
+        order: 0;
+    }
+}
+
+.fact-list {
+    list-style: none;
+    margin: 1.6rem 0 0;
+    padding: 0;
+}
+
+.fact-list li {
+    padding: 1rem 0;
+    border-bottom: 1px solid rgba(216, 204, 174, .16);
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 1.2rem;
+}
+
+.section-stone .fact-list li {
+    border-bottom-color: rgba(58, 42, 26, .18);
+}
+
+.fact-list li .tag {
+    font-family: var(--font-display);
+    color: var(--gold-light);
+    font-size: .85rem;
+    letter-spacing: .06em;
+}
+
+.section-stone .fact-list li .tag {
+    color: var(--brown-warm);
+}
+
+.fact-list li p {
+    margin: 0;
+    color: var(--ink-dim);
+    line-height: 1.6;
+}
+
+.section-stone .fact-list li p {
+    color: #5a4127;
+}
+
+.media-frame {
+    position: relative;
+    border: 1px solid rgba(185, 141, 62, .4);
+    padding: 10px;
+    transition: transform .6s ease, border-color .6s ease;
+}
+
+.media-frame:hover {
+    transform: translateY(-6px);
+    border-color: var(--gold-light);
+}
+
+.media-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.media-frame .cap {
+    font-family: var(--font-display);
+    font-size: .72rem;
+    letter-spacing: .1em;
+    color: var(--gold-light);
+    margin-top: .7rem;
+}
+
+.portrait-row {
+    display: flex;
+    gap: 1.6rem;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+}
+
+.portrait-card {
+    flex: 1 1 220px;
+    background: rgba(255, 255, 255, .02);
+    border: 1px solid rgba(185, 141, 62, .25);
+    padding: 1.4rem;
+    transition: transform .45s ease, background .45s ease, border-color .45s ease;
+}
+
+.portrait-card:hover {
+    transform: translateY(-8px);
+    background: rgba(185, 141, 62, .08);
+    border-color: var(--gold-light);
+}
+
+.portrait-card img {
+    width: 100%;
+    aspect-ratio: 4/5;
+    object-fit: cover;
+    margin-bottom: 1rem;
+}
+
+.portrait-card h4 {
+    font-size: 1.05rem;
+    color: var(--ink);
+    margin-bottom: .5rem;
+}
+
+.portrait-card p {
+    font-size: .92rem;
+    color: var(--ink-dim);
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* =========================================================
+   4. TIMELINE
+   ========================================================= */
+.timeline {
+    position: relative;
+    max-width: 760px;
+    margin: 3.5rem auto 0;
+    padding-left: 2.2rem;
+}
+
+.timeline::before {
+    content: "";
+    position: absolute;
+    left: 8px;
+    top: 6px;
+    bottom: 6px;
+    width: 2px;
+    background: linear-gradient(180deg, var(--gold), rgba(185, 141, 62, .15));
+    transform-origin: top;
+    transform: scaleY(0);
+    transition: transform 1.6s cubic-bezier(.2, .7, .2, 1);
+}
+
+.timeline.in-view::before {
+    transform: scaleY(1);
+}
+
+.t-item {
+    position: relative;
+    padding: 0 0 3rem 1.8rem;
+    opacity: 0;
+    transform: translateX(-14px);
+    transition: opacity .7s ease, transform .7s ease;
+}
+
+.t-item.in-view {
+    opacity: 1;
+    transform: none;
+}
+
+.t-item::before {
+    content: "";
+    position: absolute;
+    left: -2.2rem;
+    top: 4px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--charcoal);
+    border: 2px solid var(--gold);
+    transition: background .3s ease, box-shadow .3s ease;
+}
+
+.t-item:hover::before {
+    background: var(--gold);
+    box-shadow: 0 0 0 6px rgba(185, 141, 62, .18);
+}
+
+.t-item .t-year {
+    font-family: var(--font-display);
+    color: var(--gold-light);
+    font-size: .85rem;
+    letter-spacing: .08em;
+}
+
+.t-item h4 {
+    margin: .3rem 0 .4rem;
+    font-size: 1.3rem;
+    color: var(--ink);
+}
+
+.t-item p {
+    margin: 0;
+    color: var(--ink-dim);
+    max-width: 50ch;
+    line-height: 1.6;
+}
+
+/* =========================================================
+   5. EMPIRE MAP
+   ========================================================= */
+.map-wrap {
+    position: relative;
+    border: 1px solid rgba(185, 141, 62, .35);
+    overflow: hidden;
+}
+
+.map-wrap img {
+    width: 100%;
+    transition: transform 1.2s ease;
+}
+
+.map-wrap:hover img {
+    transform: scale(1.04);
+}
+
+.map-tags {
+    list-style: none;
+    margin: 2rem 0 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    gap: 1rem;
+}
+
+.map-tags li {
+    border-left: 2px solid var(--gold);
+    padding: .3rem 0 .3rem 1rem;
+    color: var(--ink-dim);
+    font-size: .98rem;
+}
+
+.map-tags li b {
+    display: block;
+    color: var(--ink);
+    font-family: var(--font-display);
+    font-size: .95rem;
+    margin-bottom: .15rem;
+}
+
+/* =========================================================
+   6. CHANAKYA MANUSCRIPT PANEL
+   ========================================================= */
+.manuscript {
+    background: var(--parchment-2);
+    color: var(--brown-deep);
+    border: 1px solid rgba(58, 42, 26, .35);
+    box-shadow: 0 30px 60px var(--shadow);
+    padding: clamp(2rem, 5vw, 4rem);
+    position: relative;
+}
+
+.manuscript::before,
+.manuscript::after {
+    content: "";
+    position: absolute;
+    width: 34px;
+    height: 34px;
+    border: 2px solid var(--brown-warm);
+}
+
+.manuscript::before {
+    top: 14px;
+    left: 14px;
+    border-right: none;
+    border-bottom: none;
+}
+
+.manuscript::after {
+    bottom: 14px;
+    right: 14px;
+    border-left: none;
+    border-top: none;
+}
+
+.manuscript h2 {
+    color: var(--brown-deep);
+    max-width: none;
+}
+
+.manuscript .lede {
+    color: #5a4127;
+}
+
+.arth-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.4rem;
+    margin-top: 2.4rem;
+}
+
+.arth-item {
+    border-top: 2px solid var(--brown-warm);
+    padding-top: 1rem;
+    transition: transform .4s ease;
+}
+
+.arth-item:hover {
+    transform: translateY(-5px);
+}
+
+.arth-item h4 {
+    font-size: 1.05rem;
+    margin-bottom: .5rem;
+}
+
+.arth-item p {
+    margin: 0;
+    font-size: .94rem;
+    line-height: 1.6;
+    color: #6b4f2f;
+}
+
+/* =========================================================
+   7. LIFE INSIDE — flip cards
+   ========================================================= */
+.life-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1.2rem;
+    margin-top: 2.6rem;
+}
+
+@media (max-width: 1000px) {
+    .life-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 560px) {
+    .life-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.flip-card {
+    perspective: 1400px;
+    height: 320px;
+}
+
+.flip-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: transform .7s cubic-bezier(.2, .7, .2, 1);
+}
+
+.flip-card:hover .flip-inner {
+    transform: rotateY(180deg);
+}
+
+.flip-face {
+    position: absolute;
+    inset: 0;
+    backface-visibility: hidden;
+    border: 1px solid rgba(185, 141, 62, .35);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 1.2rem;
+}
+
+.flip-front {
+    background-size: cover;
+    background-position: center;
+    background-color: var(--brown-mid);
+}
+
+.flip-front::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 40%, rgba(0, 0, 0, .75));
+}
+
+.flip-front h4 {
+    position: relative;
+    color: var(--ink);
+    font-size: 1.15rem;
+}
+
+.flip-back {
+    background: var(--brown-deep);
+    transform: rotateY(180deg);
+    color: var(--ink-dim);
+    justify-content: center;
+}
+
+.flip-back p {
+    margin: 0;
+    font-size: .9rem;
+    line-height: 1.6;
+}
+
+.flip-back h4 {
+    color: var(--gold-light);
+    margin-bottom: .6rem;
+    font-size: 1rem;
+}
+
+/* =========================================================
+   8. PATALIPUTRA
+   ========================================================= */
+.city-hero {
+    position: relative;
+    min-height: 70vh;
+    display: flex;
+    align-items: flex-end;
+    background:
+        linear-gradient(180deg, rgba(23, 20, 15, .15), rgba(23, 20, 15, .95)),
+        url(../img/image\ copy\ 13.png) center/cover;
+    border: 1px solid rgba(185, 141, 62, .3);
+    padding: clamp(2rem, 5vw, 4rem);
+}
+
+.city-hero-content {
+    max-width: 640px;
+}
+
+.city-points {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.6rem;
+    margin-top: 2.4rem;
+}
+
+.city-points .pt {
+    border-top: 1px solid rgba(185, 141, 62, .4);
+    padding-top: .9rem;
+}
+
+.city-points .pt h4 {
+    font-size: 1rem;
+    color: var(--gold-light);
+    margin-bottom: .4rem;
+}
+
+.city-points .pt p {
+    margin: 0;
+    color: var(--ink-dim);
+    font-size: .92rem;
+    line-height: 1.55;
+}
+
+/* =========================================================
+   9. ASHOKA
+   ========================================================= */
+.ashoka-grid {
+    display: grid;
+    grid-template-columns: .8fr 1.2fr;
+    gap: clamp(2rem, 5vw, 4rem);
+
+    /* Center the whole grid */
+    max-width: 1100px;
+    margin: 0 auto;
+
+    /* Vertical alignment */
+    align-items: center;
+}
+
+@media (max-width: 860px) {
+    .ashoka-grid {
+        grid-template-columns: 1fr;
+        max-width: 700px;
+    }
+}
+
+.ashoka-portrait {
+    border: 1px solid rgba(185, 141, 62, .4);
+    padding: 10px;
+    align-self: center;
+}
+
+.ashoka-portrait img {
+    width: 100%;
+    display: block;
+}
+
+.stage-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.stage-list li {
+    padding: 1.3rem 0 1.3rem 2rem;
+    border-left: 1px solid rgba(185, 141, 62, .3);
+    position: relative;
+    transition: border-color .4s ease;
+}
+
+.stage-list li:hover {
+    border-left-color: var(--gold-light);
+}
+
+.stage-list li::before {
+    content: "";
+    position: absolute;
+    left: -6px;
+    top: 1.55rem;
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background: var(--gold);
+}
+
+.stage-list h4 {
+    color: var(--ink);
+    font-size: 1.1rem;
+    margin-bottom: .4rem;
+}
+
+.stage-list p {
+    margin: 0;
+    color: var(--ink-dim);
+    line-height: 1.6;
+    max-width: 56ch;
+}
+/* =========================================================
+   10. KALINGA WAR — cinematic
+   ========================================================= */
+.kalinga {
+    background: linear-gradient(200deg, #241109 0%, #3a2a1a 45%, var(--charcoal) 100%);
+    position: relative;
+}
+
+.stage-track {
+    display: flex;
+    overflow-x: auto;
+    gap: 1.4rem;
+    margin-top: 2.6rem;
+    padding-bottom: 1rem;
+    scroll-snap-type: x proximity;
+}
+
+.stage-track::-webkit-scrollbar {
+    height: 6px;
+}
+
+.stage-track::-webkit-scrollbar-thumb {
+    background: var(--gold-dim);
+}
+
+.stage-card {
+    flex: 0 0 250px;
+    scroll-snap-align: start;
+    background: rgba(0, 0, 0, .28);
+    border: 1px solid rgba(185, 141, 62, .3);
+    padding: 1.6rem;
+    transition: transform .4s ease, background .4s ease;
+}
+
+.stage-card:hover {
+    transform: translateY(-8px);
+    background: rgba(185, 141, 62, .12);
+}
+
+.stage-card .num {
+    font-family: var(--font-display);
+    color: var(--gold-light);
+    font-size: .85rem;
+    letter-spacing: .1em;
+}
+
+.stage-card h4 {
+    margin: .5rem 0;
+    font-size: 1.1rem;
+    color: var(--ink);
+}
+
+.stage-card p {
+    margin: 0;
+    font-size: .9rem;
+    color: var(--ink-dim);
+    line-height: 1.55;
+}
+
+.kalinga-quote {
+    margin-top: 3rem;
+    font-family: var(--font-display);
+    font-size: clamp(1.3rem, 2.6vw, 1.8rem);
+    color: var(--gold-light);
+    max-width: 46ch;
+    line-height: 1.5;
+    border-left: 2px solid var(--gold);
+    padding-left: 1.6rem;
+}
+
+/* =========================================================
+   11. DHAMMA
+   ========================================================= */
+.dhamma-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.4rem;
+    margin-top: 2.6rem;
+}
+
+.dhamma-card {
+    background: rgba(255, 255, 255, .03);
+    border: 1px solid rgba(185, 141, 62, .3);
+    padding: 1.6rem;
+    transition: transform .4s ease, border-color .4s ease, background .4s ease;
+}
+
+.dhamma-card:hover {
+    transform: translateY(-8px) rotate(-.4deg);
+    border-color: var(--gold-light);
+    background: rgba(185, 141, 62, .08);
+}
+
+.dhamma-card h4 {
+    color: var(--gold-light);
+    font-size: 1.05rem;
+    margin-bottom: .6rem;
+}
+
+.dhamma-card p {
+    margin: 0;
+    color: var(--ink-dim);
+    font-size: .92rem;
+    line-height: 1.6;
+}
+
+.edict-strip {
+    display: flex;
+    gap: 1.2rem;
+    margin-top: 2.8rem;
+    overflow-x: auto;
+}
+
+.edict-strip img {
+    flex: 0 0 200px;
+    height: 260px;
+    object-fit: cover;
+    border: 1px solid rgba(185, 141, 62, .35);
+    filter: grayscale(.15);
+    transition: filter .4s ease, transform .4s ease;
+}
+
+.edict-strip img:hover {
+    filter: grayscale(0);
+    transform: translateY(-6px);
+}
+
+/* =========================================================
+   12. LEGACY
+   ========================================================= */
+.legacy {
+    text-align: center;
+    background: radial-gradient(circle at 50% 0%, rgba(185, 141, 62, .14), transparent 60%), var(--charcoal);
+}
+
+.legacy .gold-rule {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.legacy h2 {
+    max-width: none;
+    margin: 0 auto;
+}
+
+.chakra {
+    width: 140px;
+    height: 140px;
+    margin: 2.4rem auto 0;
+    animation: spin 24s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.legacy-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.4rem;
+    margin: 3rem auto 0;
+    max-width: 980px;
+    text-align: left;
+}
+
+.legacy-grid .lg-item {
+    border-top: 1px solid rgba(185, 141, 62, .35);
+    padding-top: .9rem;
+}
+
+.legacy-grid .lg-item h4 {
+    color: var(--gold-light);
+    font-size: .98rem;
+    margin-bottom: .4rem;
+}
+
+.legacy-grid .lg-item p {
+    margin: 0;
+    color: var(--ink-dim);
+    font-size: .9rem;
+    line-height: 1.55;
+}
+
+footer {
+    text-align: center;
+    padding: 2.4rem 6vw;
+    background: var(--charcoal-2);
+    color: var(--gold-dim);
+    font-size: .82rem;
+    letter-spacing: .06em;
+    font-family: var(--font-display);
+}
+
+/* accessibility */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: .001ms !important;
+        transition-duration: .001ms !important;
+    }
+}
+
+:focus-visible {
+    outline: 2px solid var(--gold-light);
+    outline-offset: 3px;
+}
+
+
+.page-arrow {
+    position: fixed;
+    top: 50%;
+    /* transform: translateY(-50%); */
+    /* transform: rotate(90deg); */
+    z-index: 1000;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    border: 1px solid rgba(185, 141, 62, .55);
+    background: rgba(23, 20, 15, .65);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    display: grid;
+    place-items: center;
+    text-decoration: none;
+    transition: background .3s ease, border-color .3s ease, transform .3s ease;
+}
+
+.page-arrow-left  { left: 1.2rem; transform: rotate(-90deg); }
+.page-arrow-right { right: 1.2rem; transform: rotate(-90deg);}
+
+/* chevron drawn with CSS */
+.page-arrow::before {
+    content: "";
+    width: 11px;
+    height: 11px;
+    border-top: 2.2px solid var(--gold-light);
+    border-right: 2.2px solid var(--gold-light);
+    transition: border-color .3s ease;
+}
+
+/* left arrow points up, right arrow points down */
+.page-arrow-left::before  { transform: rotate(-45deg); margin-top: 4px; }
+.page-arrow-right::before { transform: rotate(135deg); margin-bottom: 4px; }
+
+.page-arrow:hover {
+    background: var(--gold);
+    border-color: var(--gold-light);
+}
+
+.page-arrow:hover::before {
+    border-color: var(--charcoal);
+}
+
+@media (max-width: 640px) {
+    .page-arrow { width: 40px; height: 40px; }
+    .page-arrow::before { width: 9px; height: 9px; }
+    .page-arrow-left  { left: .5rem; }
+    .page-arrow-right { right: .5rem; }
+}

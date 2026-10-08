@@ -1,0 +1,903 @@
+/* BRITISH INDIA — colonial / documentary style
+   dark green #16331f | cream #e9dfc4 | muted brown #6b4a34 */
+:root {
+  --green: #16331f;
+  --green-deep: #0f2417;
+  --cream: #e9dfc4;
+   --gold: #c9a227;
+   --charcoal: #17140f;
+   --gold-light: #e0bd7d;
+  --paper: #f4eeda;
+  --brown: #6b4a34;
+  --brass: #a9824f;
+  --ink: #20180f;
+  --font-display: "Playfair Display", serif;
+  --font-label: "Special Elite", monospace;
+  --font-body: "Lora", serif;
+}
+
+* {
+  box-sizing: border-box
+}
+
+html {
+  scroll-behavior: smooth
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 1.08rem;
+  line-height: 1.7
+}
+
+img {
+  max-width: 100%;
+  display: block
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: var(--font-display);
+  margin: 0
+}
+
+/* SHARED */
+.page-wrap {
+  padding-left: clamp(1.5rem, 6vw, 5rem);
+  padding-right: clamp(1.5rem, 6vw, 5rem)
+}
+
+.section-block {
+  padding: 6rem 0;
+  position: relative
+}
+
+.bg-black {
+  background: var(--green-deep) !important
+}
+
+.bg-cream {
+  background: var(--paper)
+}
+
+.section-label {
+  font-family: var(--font-label);
+  color: var(--brown);
+  font-size: .9rem;
+  margin: 0 0 .7rem;
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+  letter-spacing: .03em
+}
+
+.section-label::before {
+  content: "";
+  width: 28px;
+  height: 1px;
+  background: currentColor
+}
+
+.section-label.light {
+  color: var(--cream)
+}
+
+.section-heading {
+  font-size: clamp(2rem, 3.2vw, 2.8rem);
+  font-weight: 600;
+  margin-bottom: 1rem
+}
+
+.section-heading.light {
+  color: var(--cream)
+}
+
+.section-text {
+  max-width: 65ch;
+  color: #3a2f22
+}
+
+.section-text.light {
+  color: rgba(233, 223, 196, .85)
+}
+
+.cover-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover
+}
+
+/* ARCHIVAL / FADED PHOTO TREATMENT — sepia at rest, sharpens toward hover */
+.archival-img img,
+.archival-img.cover-img {
+  filter: grayscale(.4) sepia(.35) contrast(.95) brightness(.93);
+  transition: filter .8s ease, transform .8s cubic-bezier(.22, .9, .35, 1)
+}
+
+/* ============ SCROLL-REVEAL (shared) ============ */
+.reveal {
+  opacity: 0;
+  transform: translateY(45px);
+  transition: opacity .9s cubic-bezier(.22, .9, .35, 1), transform .9s cubic-bezier(.22, .9, .35, 1)
+}
+
+.reveal.in-view {
+  opacity: 1;
+  transform: translateY(0)
+}
+
+/* 1 HERO */
+.hero-section {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+  color: var(--cream)
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(15, 36, 23, .35), rgba(15, 36, 23, .65) 55%, rgba(15, 36, 23, .96))
+}
+
+.hero-content {
+  position: relative;
+  padding-bottom: 7rem
+}
+
+.kicker {
+  font-family: var(--font-label);
+  color: var(--brass);
+  letter-spacing: .1em;
+  margin-bottom: .5rem;
+  opacity: 0;
+  animation: fadeUp .9s ease .2s forwards
+}
+
+.hero-title {
+  font-size: clamp(2.6rem, 7vw, 5.2rem);
+  font-weight: 700;
+  line-height: 1.08;
+  margin-bottom: 1.3rem;
+  opacity: 0;
+  animation: fadeUp 1s ease .4s forwards
+}
+
+.hero-intro {
+  max-width: 52ch;
+  font-size: 1.2rem;
+  color: rgba(233, 223, 196, .9);
+  opacity: 0;
+  animation: fadeUp 1s ease .65s forwards
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px)
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0)
+  }
+}
+
+/* slow continuous zoom on full-bleed archival photos */
+.kenburns {
+  animation: kenburns 24s ease-in-out infinite alternate
+}
+
+@keyframes kenburns {
+  0% {
+    transform: scale(1)
+  }
+
+  100% {
+    transform: scale(1.1)
+  }
+}
+
+.scroll-indicator {
+  position: absolute;
+  bottom: 1.8rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 26px;
+  height: 44px;
+  border: 1px solid var(--brass);
+  border-radius: 20px;
+  transition: box-shadow .3s ease
+}
+
+.scroll-indicator:hover {
+  box-shadow: 0 0 0 6px rgba(169, 130, 79, .18)
+}
+
+.scroll-indicator span {
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  margin-left: -2px;
+  width: 4px;
+  height: 8px;
+  background: var(--brass);
+  border-radius: 3px;
+  animation: scrollDot 1.8s ease-in-out infinite
+}
+
+@keyframes scrollDot {
+  0% {
+    opacity: 1;
+    top: 8px
+  }
+
+  70% {
+    opacity: .2;
+    top: 24px
+  }
+
+  100% {
+    opacity: 0;
+    top: 24px
+  }
+}
+
+/* 2 BEFORE THE RAJ / feature boxes */
+.feature-box {
+  height: 100%;
+  transition: transform .4s ease
+}
+
+.feature-box:hover {
+  transform: translateY(-6px)
+}
+
+.feature-img {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(107, 74, 52, .3);
+  margin-bottom: 1rem;
+  isolation: isolate
+}
+
+.feature-img img {
+  aspect-ratio: 7/5;
+  object-fit: cover
+}
+
+.feature-box:hover .feature-img img {
+  transform: scale(1.08);
+  filter: grayscale(.05) sepia(.1) contrast(1) brightness(1)
+}
+
+.feature-img::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -60%;
+  width: 40%;
+  height: 100%;
+  background: linear-gradient(115deg, transparent, rgba(233, 223, 196, .4), transparent);
+  transform: skewX(-15deg);
+  pointer-events: none;
+  transition: left .9s ease;
+  z-index: 2
+}
+
+.feature-box:hover .feature-img::after {
+  left: 130%
+}
+
+.feature-box h4 {
+  color: var(--green);
+  font-size: 1.35rem;
+  margin-bottom: .5rem
+}
+
+.feature-box p {
+  color: #4a3d2c;
+  font-size: .98rem;
+  margin: 0
+}
+
+/* 3 / 10 DOC TIMELINE (shared pattern) */
+.doc-timeline {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1.6rem
+}
+
+.doc-step {
+  transition: transform .35s ease
+}
+
+.doc-step:hover {
+  transform: translateY(-6px)
+}
+
+.doc-num {
+  font-family: var(--font-label);
+  color: var(--brass);
+  font-size: .85rem;
+  display: block;
+  margin-bottom: .6rem
+}
+
+.doc-img {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(233, 223, 196, .3);
+  margin-bottom: 1rem
+}
+
+.doc-img img {
+  aspect-ratio: 7/5;
+  object-fit: cover
+}
+
+.doc-step:hover .doc-img img {
+  transform: scale(1.1);
+  filter: grayscale(.05) sepia(.1) contrast(1) brightness(1)
+}
+
+.doc-img::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  outline: 1px solid var(--brass);
+  outline-offset: -8px;
+  opacity: 0;
+  transition: opacity .4s ease, outline-offset .4s ease;
+  pointer-events: none
+}
+
+.doc-step:hover .doc-img::before {
+  opacity: 1;
+  outline-offset: -12px
+}
+
+.doc-step h4 {
+  color: var(--cream);
+  font-size: 1.15rem;
+  margin-bottom: .4rem
+}
+
+.doc-step p {
+  color: rgba(233, 223, 196, .78);
+  font-size: .92rem;
+  margin: 0
+}
+
+/* 4 EAST INDIA COMPANY */
+.img-frame {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(107, 74, 52, .35);
+  isolation: isolate
+}
+
+.img-frame img {
+  width: 100%;
+  object-fit: cover
+}
+
+.img-frame:hover img {
+  transform: scale(1.07);
+  filter: grayscale(.05) sepia(.1) contrast(1) brightness(1)
+}
+
+.img-frame::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  outline: 1px solid var(--brass);
+  outline-offset: -8px;
+  opacity: 0;
+  transition: opacity .5s ease, outline-offset .5s ease;
+  z-index: 2;
+  pointer-events: none
+}
+
+.img-frame:hover::before {
+  opacity: 1;
+  outline-offset: -12px
+}
+
+.topic-item {
+  border-left: 2px solid var(--brass);
+  padding: .2rem 0 .2rem 1.1rem;
+  height: 100%;
+  transition: padding-left .3s ease, background-color .3s ease
+}
+
+.topic-item:hover {
+  padding-left: 1.5rem;
+  background: rgba(169, 130, 79, .08)
+}
+
+.topic-item h4 {
+  color: var(--green);
+  font-size: 1.2rem;
+  margin-bottom: .3rem
+}
+
+.topic-item p {
+  margin: 0;
+  color: #4a3d2c;
+  font-size: .95rem
+}
+
+/* 5 REVOLT OF 1857 */
+.revolt-box {
+  height: 100%;
+  transition: transform .4s ease
+}
+
+.revolt-box:hover {
+  transform: translateY(-6px)
+}
+
+.revolt-img {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(233, 223, 196, .3);
+  margin-bottom: 1rem
+}
+
+.revolt-img img {
+  aspect-ratio: 7/5;
+  object-fit: cover
+}
+
+.revolt-box:hover .revolt-img img {
+  transform: scale(1.1);
+  filter: grayscale(.05) sepia(.1) contrast(1) brightness(1)
+}
+
+.revolt-box h4 {
+  color: var(--cream);
+  font-size: 1.25rem;
+  margin-bottom: .4rem
+}
+
+.revolt-box p {
+  color: rgba(233, 223, 196, .78);
+  font-size: .94rem;
+  margin: 0
+}
+
+/* 6 THE BRITISH RAJ */
+.raj-item {
+  border-top: 2px solid var(--brass);
+  padding-top: .9rem;
+  height: 100%;
+  transition: transform .3s ease, border-color .3s ease
+}
+
+.raj-item:hover {
+  transform: translateX(4px);
+  border-color: var(--green)
+}
+
+.raj-item h4 {
+  color: var(--green);
+  font-size: 1.3rem;
+  margin-bottom: .4rem
+}
+
+.raj-item p {
+  margin: 0;
+  color: #4a3d2c;
+  font-size: .96rem
+}
+
+/* 7 COLONIAL ACCORDION */
+.colonial-accordion .accordion-item {
+  background: transparent;
+  border: 1px solid rgba(233, 223, 196, .25);
+  margin-bottom: .8rem;
+  transition: border-color .3s ease
+}
+
+.colonial-accordion .accordion-item:hover {
+  border-color: rgba(169, 130, 79, .6)
+}
+
+.colonial-accordion .accordion-button {
+  background: var(--green-deep);
+  color: var(--cream);
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  box-shadow: none;
+  transition: background-color .35s ease, color .35s ease, padding-left .35s ease
+}
+
+.colonial-accordion .accordion-button:hover {
+  padding-left: 1.8rem
+}
+
+.colonial-accordion .accordion-button:not(.collapsed) {
+  background: var(--green);
+  color: var(--brass)
+}
+
+.colonial-accordion .accordion-button::after {
+  filter: invert(1)
+}
+
+.colonial-accordion .accordion-body {
+  background: var(--green-deep);
+  color: rgba(233, 223, 196, .85);
+  font-size: 1rem
+}
+
+/* 8 CITIES TRANSFORMED */
+.city-card {
+  height: 100%;
+  transition: transform .45s cubic-bezier(.22, .9, .35, 1)
+}
+
+.city-card:hover {
+  transform: translateY(-8px)
+}
+
+.city-card .archival-img {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(107, 74, 52, .3);
+  margin-bottom: 1rem
+}
+
+.city-card .archival-img::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(169, 130, 79, 0);
+  transition: background-color .4s ease;
+  pointer-events: none
+}
+
+.city-card:hover .archival-img::after {
+  background: rgba(169, 130, 79, .14)
+}
+
+.city-card img {
+  width: 100%;
+  aspect-ratio: 4/3;
+  object-fit: cover
+}
+
+.city-card:hover img {
+  transform: scale(1.1);
+  filter: grayscale(.05) sepia(.1) contrast(1) brightness(1)
+}
+
+.city-card h4 {
+  color: var(--green);
+  font-size: 1.4rem;
+  margin-bottom: .4rem
+}
+
+.city-card p {
+  color: #4a3d2c;
+  font-size: .96rem;
+  margin: 0
+}
+
+/* 9 VOICES OF RESISTANCE */
+.profile-card {
+  text-align: center;
+  transition: transform .4s ease
+}
+
+.profile-card:hover {
+  transform: translateY(-6px)
+}
+
+.profile-img {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(233, 223, 196, .3);
+  margin-bottom: .8rem
+}
+
+.profile-img img {
+  width: 100%;
+  aspect-ratio: 5/6;
+  object-fit: cover
+}
+
+.profile-card:hover .profile-img img {
+  transform: scale(1.1);
+  filter: grayscale(.05) sepia(.1) contrast(1) brightness(1)
+}
+
+.profile-card h5 {
+  color: var(--cream);
+  font-size: 1.15rem;
+  margin-bottom: .2rem;
+  position: relative;
+  display: inline-block
+}
+
+.profile-card h5::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  height: 1px;
+  width: 0;
+  background: var(--brass);
+  transition: width .4s ease
+}
+
+.profile-card:hover h5::after {
+  width: 100%
+}
+
+.profile-card span {
+  display: block;
+  font-family: var(--font-label);
+  color: var(--brass);
+  font-size: .78rem
+}
+
+/* 10 MOVEMENT TABS */
+.movement-nav {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  gap: 0;
+  margin: 1.5rem 0 2rem;
+  padding-bottom: .5rem;
+  border-bottom: 1px solid rgba(107, 74, 52, .35)
+}
+
+.movement-nav .nav-item {
+  flex: 1 0 auto
+}
+
+.movement-nav .nav-link {
+  width: 100%;
+  border-radius: 0;
+  background: transparent;
+  color: var(--ink);
+  text-align: center;
+  padding: 1rem 1.2rem;
+  border-bottom: 3px solid transparent;
+  font-family: var(--font-display);
+  transition: transform .3s ease, color .3s ease, border-color .3s ease
+}
+
+.movement-nav .nav-link b {
+  display: block;
+  font-size: 1.15rem
+}
+
+.movement-nav .nav-link small {
+  font-family: var(--font-label);
+  color: var(--brown)
+}
+
+.movement-nav .nav-link.active {
+  background: rgba(107, 74, 52, .1);
+  border-bottom-color: var(--brass);
+  color: var(--brown)
+}
+
+.movement-nav .nav-link:hover {
+  transform: translateY(-3px);
+  color: var(--brown)
+}
+
+.movement-panel {
+  background: var(--green-deep);
+  border: 1px solid rgba(233, 223, 196, .25);
+  padding: 2rem;
+  color: var(--cream)
+}
+
+.movement-panel h3 {
+  color: var(--brass);
+  font-size: 1.8rem;
+  margin-bottom: .6rem
+}
+
+.movement-panel p {
+  color: rgba(233, 223, 196, .88);
+  margin: 0;
+  max-width: 62ch
+}
+
+.movement-panel .img-frame img {
+  aspect-ratio: 10/7
+}
+
+.tab-pane.active .row {
+  animation: fadeUp .6s ease forwards
+}
+
+/* 11 ROAD TO INDEPENDENCE */
+.event-list {
+  list-style: none;
+  padding: 0;
+  margin: 0
+}
+
+.event-list li {
+  padding: .9rem 0;
+  border-bottom: 1px solid rgba(233, 223, 196, .2);
+  color: rgba(233, 223, 196, .85);
+  transition: padding-left .3s ease, border-color .3s ease
+}
+
+.event-list li:hover {
+  padding-left: .6rem;
+  border-color: var(--brass)
+}
+
+.event-list li:first-child {
+  padding-top: 0
+}
+
+.event-list span {
+  display: inline-block;
+  min-width: 60px;
+  font-family: var(--font-label);
+  color: var(--brass);
+  margin-right: .6rem
+}
+
+/* 12 INDEPENDENCE ENDING */
+.legacy-section {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+  color: var(--cream)
+}
+
+.legacy-content {
+  position: relative;
+  padding: 6rem 1.5rem
+}
+
+.legacy-heading {
+  font-size: clamp(3rem, 9vw, 7rem);
+  font-weight: 700;
+  color: var(--cream);
+  letter-spacing: .02em
+}
+
+.legacy-text {
+  max-width: 56ch;
+  margin: 1.5rem auto 2rem;
+  font-size: 1.2rem;
+  color: rgba(233, 223, 196, .88)
+}
+
+.next-page-link {
+  display: inline-block;
+  font-family: var(--font-label);
+  color: var(--brass);
+  border: 1px solid var(--brass);
+  padding: .8rem 1.8rem;
+  text-decoration: none;
+  letter-spacing: .05em;
+  transition: background-color .3s ease, color .3s ease, transform .3s ease
+}
+
+.next-page-link:hover {
+  background: var(--brass);
+  color: var(--green-deep);
+  transform: translateY(-3px)
+}
+
+/* RESPONSIVE */
+@media(max-width:991px) {
+  .section-block {
+    padding: 4.5rem 0
+  }
+
+  .doc-timeline {
+    grid-template-columns: repeat(3, 1fr)
+  }
+}
+
+@media(max-width:575px) {
+  .doc-timeline {
+    grid-template-columns: 1fr
+  }
+}
+
+@media(prefers-reduced-motion:reduce) {
+  html {
+    scroll-behavior: auto
+  }
+
+  .kenburns,
+  .scroll-indicator span,
+  .hero-title,
+  .hero-intro,
+  .kicker {
+    animation: none;
+    opacity: 1;
+    transform: none
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none
+  }
+
+  * {
+    transition-duration: .01ms !important
+  }
+}
+
+.page-arrow {
+    position: fixed;
+    top: 50%;
+    /* transform: translateY(-50%); */
+    /* transform: rotate(90deg); */
+    z-index: 1000;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    border: 1px solid rgba(185, 141, 62, .55);
+    background: rgba(23, 20, 15, .65);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    display: grid;
+    place-items: center;
+    text-decoration: none;
+    transition: background .3s ease, border-color .3s ease, transform .3s ease;
+}
+
+.page-arrow-left  { left: 1.2rem; transform: rotate(-90deg); }
+.page-arrow-right { right: 1.2rem; transform: rotate(-90deg);}
+
+/* chevron drawn with CSS */
+.page-arrow::before {
+    content: "";
+    width: 11px;
+    height: 11px;
+    border-top: 2.2px solid var(--gold-light);
+    border-right: 2.2px solid var(--gold-light);
+    transition: border-color .3s ease;
+}
+
+/* left arrow points up, right arrow points down */
+.page-arrow-left::before  { transform: rotate(-45deg); margin-top: 4px; }
+.page-arrow-right::before { transform: rotate(135deg); margin-bottom: 4px; }
+
+.page-arrow:hover {
+    background: var(--gold);
+    border-color: var(--gold-light);
+}
+
+.page-arrow:hover::before {
+    border-color: var(--charcoal);
+}
+
+@media (max-width: 640px) {
+    .page-arrow { width: 40px; height: 40px; }
+    .page-arrow::before { width: 9px; height: 9px; }
+    .page-arrow-left  { left: .5rem; }
+    .page-arrow-right { right: .5rem; }
+}
